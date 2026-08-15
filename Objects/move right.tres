@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Move2DAction" format=3 uid="uid://dn6bwi6s54yni"]
+
+[ext_resource type="Script" uid="uid://cd0cgfuqhukv1" path="res://Actions/Move2DAction.cs" id="1_eyjvu"]
+
+[sub_resource type="Curve" id="Curve_eyjvu"]
+_limits = [0.0, 1.0, 0.0, 3.9]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(3.9, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[resource]
+script = ExtResource("1_eyjvu")
+_endPos = Vector2(1152, 0)
+_duration = 2.0
+_blocking = true
+_easing = SubResource("Curve_eyjvu")
+metadata/_custom_type_script = "uid://cd0cgfuqhukv1"

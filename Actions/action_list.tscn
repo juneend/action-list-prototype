@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bp2qp28bf84l"]
+
+[ext_resource type="Script" uid="uid://b54juyrl30v42" path="res://Actions/ActionList.cs" id="1_gkxuf"]
+
+[node name="ActionList" type="Node2D" unique_id=80442144]
+script = ExtResource("1_gkxuf")

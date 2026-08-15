@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://xduo8dkcuclk"]
+
+[ext_resource type="Script" uid="uid://c5jg8sun6djgc" path="res://Scenes/GameManager.cs" id="1_p6gg1"]
+[ext_resource type="Texture2D" uid="uid://brn0s4nr1rq1b" path="res://icon.svg" id="2_lrus4"]
+[ext_resource type="PackedScene" uid="uid://bp2qp28bf84l" path="res://Actions/action_list.tscn" id="3_lrus4"]
+[ext_resource type="Script" uid="uid://bx21ot2cwt2hj" path="res://Actions/Action.cs" id="4_6yy46"]
+[ext_resource type="Resource" uid="uid://dn6bwi6s54yni" path="res://Objects/move right.tres" id="5_f6sb3"]
+[ext_resource type="Resource" uid="uid://0itrc8m1un0i" path="res://Objects/move down.tres" id="6_mn0nn"]
+[ext_resource type="Resource" uid="uid://chb3v3ksvi0gf" path="res://Objects/move left.tres" id="7_fi6k0"]
+[ext_resource type="Resource" uid="uid://6dyxqmgbkxdd" path="res://Objects/move up.tres" id="8_lnogb"]
+
+[node name="Scene" type="Node2D" unique_id=1461892055]
+script = ExtResource("1_p6gg1")
+
+[node name="ActionList" parent="." unique_id=80442144 node_paths=PackedStringArray("ActionObject") instance=ExtResource("3_lrus4")]
+actionList = Array[ExtResource("4_6yy46")]([ExtResource("5_f6sb3"), ExtResource("6_mn0nn"), ExtResource("7_fi6k0"), ExtResource("8_lnogb")])
+ActionObject = NodePath("../Icon")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=1815778976]
+texture = ExtResource("2_lrus4")
