@@ -9,6 +9,16 @@ public partial class Move2DAction : Action
 
     private Node2D transform;
 
+    /*  public override bool Start()
+    {
+        throw new NotImplementedException();
+    }  */
+
+    public override void _SetupLocalToScene()
+    {
+        base._SetupLocalToScene();
+    }
+
      public override bool Update()
     {
         //if the object has despawned
@@ -25,9 +35,7 @@ public partial class Move2DAction : Action
             //_endPos += new Vector3(_rand, _yRand, 0);
             
         } 
-
-        //if (_percent >= 1) { _percent = 1; }
-
+        
         node2D.GlobalPosition = _startPos + (_endPos - _startPos) * _percent;
 
         //if the action is done

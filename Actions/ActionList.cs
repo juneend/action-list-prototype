@@ -33,6 +33,14 @@ public partial class ActionList : Node2D
                 action._ActionObj = ActionObject;
             }
         }
+
+        //set debug container to be invisible
+        if (debug){GetChild<VBoxContainer>(0).Visible = false;}
+    }
+
+    public void DebugReady()
+    {
+        
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

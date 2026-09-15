@@ -30,9 +30,16 @@ public abstract partial class Action : Resource
     //deltatime elapsed since action began
     public float _timeElapsed;
 
-    //TODO: how to do actions with easing that go past 1?
-    //zero to one percentage representing how far the action is to completion
+    //percentage representing how far the action is to completion
+    //starts at zero and usually ends at 1, except if curve goes beyond 1 or below 0
+    //calculated by taking (_timeElapsed / _duration) and sampling the easing curve at that point
     public float _percent;
+
+    public override void _SetupLocalToScene()
+    {
+        base._SetupLocalToScene();
+    }
+
 
     /// <summary>
     /// this function updates the action parameter based on _percent

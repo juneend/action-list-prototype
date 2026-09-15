@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cqavclntjpubj"]
+
+[ext_resource type="PackedScene" uid="uid://cudi35od38e63" path="res://Scenes/action_entry_dbg.tscn" id="1_xokry"]
+
+[node name="ActionContainerDBG" type="VBoxContainer" unique_id=2013476742]
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -50.5
+offset_right = 96.0
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ActionEntryDBG" parent="." unique_id=2127392414 instance=ExtResource("1_xokry")]
+layout_mode = 2
+
+[node name="ActionEntryDBG2" parent="." unique_id=2050320303 instance=ExtResource("1_xokry")]
+layout_mode = 2
+
+[node name="ActionEntryDBG3" parent="." unique_id=1702875256 instance=ExtResource("1_xokry")]
+layout_mode = 2
