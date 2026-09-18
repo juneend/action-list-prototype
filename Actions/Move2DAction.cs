@@ -9,18 +9,9 @@ public partial class Move2DAction : Action
 
     private Node2D transform;
 
-    /*  public override bool Start()
+    public override bool Ready()
     {
-        throw new NotImplementedException();
-    }  */
 
-    public override void _SetupLocalToScene()
-    {
-        base._SetupLocalToScene();
-    }
-
-     public override bool Update()
-    {
         //if the object has despawned
         if (IsInstanceValid(_ActionObj) == false) { return false; }
 
@@ -34,9 +25,27 @@ public partial class Move2DAction : Action
             _startPos = node2D.GlobalPosition;
             //_endPos += new Vector3(_rand, _yRand, 0);
             
-        } 
+        }
+
+        _active = true;
+
+        //TODO: maybe the actionlist should have control over these signals, instead of the action itself? 
+        EmitSignal(SignalName.ActionReadied, "Move2DAction", node2D, _duration);
+
+        return true;
+    } 
+
+     public override bool Update()
+    {
+        //if the object has despawned
+        if (IsInstanceValid(_ActionObj) == false) { return false; }
+
+        //if the node has no 2d  transformation
+        if (_ActionObj is not Node2D node2D) {return false;}
         
         node2D.GlobalPosition = _startPos + (_endPos - _startPos) * _percent;
+
+        EmitSignal(SignalName.ActionUpdate, node2D, Variant.From(node2D.GlobalPosition), _timeElapsed, _percent);
 
         //if the action is done
         if (_timeElapsed >= _duration)

@@ -10,6 +10,9 @@ public abstract partial class Action : Resource
     //than the action will effect the parent of the actionlist node
     public Node _ActionObj = null;
 
+    //bool representing if this action has completed its first update 
+    public bool _active = false;
+
     //how long this action should last
     [Export] public float _duration = 0;
 
@@ -27,6 +30,17 @@ public abstract partial class Action : Resource
     //type of easing in/out curve
     [Export] public Curve _easing;
 
+    [Signal] public delegate void ActionReadiedEventHandler(
+        string name, 
+        Node actionObj, 
+        float duration);
+    [Signal] public delegate void ActionUpdateEventHandler(
+        Node actionObj, 
+        Variant newVal, 
+        float timeElapsed,
+        float percent);
+    [Signal] public delegate void ActionRemovedEventHandler();
+
     //deltatime elapsed since action began
     public float _timeElapsed;
 
@@ -35,11 +49,8 @@ public abstract partial class Action : Resource
     //calculated by taking (_timeElapsed / _duration) and sampling the easing curve at that point
     public float _percent;
 
-    public override void _SetupLocalToScene()
-    {
-        base._SetupLocalToScene();
-    }
-
+    //called before this action's first update
+    public abstract bool Ready();
 
     /// <summary>
     /// this function updates the action parameter based on _percent
