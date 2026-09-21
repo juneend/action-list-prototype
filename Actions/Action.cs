@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Runtime.InteropServices.Marshalling;
+using System.Xml;
 
 [GlobalClass]
 public abstract partial class Action : Resource
@@ -9,9 +10,7 @@ public abstract partial class Action : Resource
     //once the action is added to a list, if this param is null
     //than the action will effect the parent of the actionlist node
     public Node _ActionObj = null;
-
-    //bool representing if this action has completed its first update 
-    public bool _active = false;
+    //TODO: actions should also export a "NodePath" to the actionobj, so it can be set in inspector
 
     //how long this action should last
     [Export] public float _duration = 0;
@@ -32,14 +31,20 @@ public abstract partial class Action : Resource
 
     [Signal] public delegate void ActionReadiedEventHandler(
         string name, 
-        Node actionObj, 
-        float duration);
+        Action selfRef);
     [Signal] public delegate void ActionUpdateEventHandler(
-        Node actionObj, 
-        Variant newVal, 
-        float timeElapsed,
-        float percent);
-    [Signal] public delegate void ActionRemovedEventHandler();
+        string name,
+        Action selfRef,
+        Variant changedValue
+    );
+    [Signal] public delegate void ActionRemovedEventHandler(
+        string name,
+        Action selfRef,
+        Variant finalValue
+    );
+
+    //bool representing if this action has completed its first update 
+    public bool _active = false;
 
     //deltatime elapsed since action began
     public float _timeElapsed;
@@ -57,6 +62,8 @@ public abstract partial class Action : Resource
     /// </summary>
     /// <returns></returns>
     public abstract bool Update();
+
+    public abstract bool Remove();
 
     /// <summary>
     /// this function is called everytime the action list updates

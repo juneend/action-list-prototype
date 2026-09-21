@@ -3,13 +3,16 @@ using Godot.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 
 public partial class ActionList : Node2D
 {
 	/// <summary>
 	//	list that contains all relevant actions, is updated every frame
 	/// </summary>
-	//[Export] public List<Action> actionList = new List<Action>();
+	//TODO: on high level memory management, if i ever want to make this cache friendly
+	//this array of resources should be contiguous when loaded
+	//maybe godot does this automatically? idk, should research l8r
 	[Export] public Array<Action> actionList = new Array<Action>();
 
 	[Export] public Node ActionObject = null;
@@ -20,9 +23,20 @@ public partial class ActionList : Node2D
 
 	[Export] public bool debug = true;
 
+	private VBoxContainer DBGContainerRef;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		//inst the degug container
+		if (debug)
+		{
+			DBGContainerRef = GD.Load<PackedScene>(
+				"res://Scenes/action_container_dbg.tscn").Instantiate<VBoxContainer>();
+			AddChild(DBGContainerRef);
+			//TODO: probably more code to change like, the container position and stuff
+		}
+
 		//on start, loop through all actions set in editor and set their actionobj
 
 		foreach (Action action in actionList)
@@ -30,18 +44,22 @@ public partial class ActionList : Node2D
 			 //if action has no object to act on
 			if(action._ActionObj == null && ActionObject != null)
 			{
+
+				//TODO: this is kinda dumb, the actionlist probably shouldn't have a specified actionobj
+				//ideally actions should affect either the node they're given, or this node's parent in an ECS-ey way
 				action._ActionObj = ActionObject;
+
+				//connect signals to the dbg container
+				if (debug) 
+				{
+					action.ActionReadied += DBG_AddEntry;
+					action.ActionUpdate += DBG_UpdateEntry;
+					action.ActionRemoved += DBG_RemoveEntry;				
+				}
 			}
 		}
-
-		//set debug container to be invisible
-		if (debug){GetChild<VBoxContainer>(0).Visible = false;}
 	}
 
-	public void DebugReady()
-	{
-		
-	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -50,7 +68,7 @@ public partial class ActionList : Node2D
 
 		if (ispaused ){dt *= 0;}
 
-		if (debug){GD.Print("Actions left: ", actionList.Count);}
+		//if (debug){GD.Print("Actions left: ", actionList.Count);}
 
 		for (int i = 0; i < actionList.Count; i++)
 		{
@@ -109,9 +127,38 @@ public partial class ActionList : Node2D
 	}
 	public void RemoveAction(ref int index)
 	{
-		//TODO: emit a signal when an action completes
+		//TODONE: emit a signal when an action completes
+		//derived class handles ^ now!
+		actionList[index].Remove();
 		actionList.RemoveAt(index);
 		index--;
 
+	}
+
+	public void DBG_AddEntry(string name, Action action)
+	{
+		if (action is Move2DAction moveAction)
+		{
+			GD.Print("readied action with name: ", action.GetType().Name);
+		}
+
+	}
+
+	public void DBG_UpdateEntry(string name, Action action, Variant changedVal)
+	{
+		//TODO: cool feature: actions that are readied and updating should be auto unfolded
+
+		if (action is Move2DAction moveAction)
+		{
+			GD.Print("updated action with name: ", action.GetType().Name, " to value ", changedVal);
+		}
+	}
+
+	public void DBG_RemoveEntry(string name, Action action, Variant finalVal)
+	{
+		if (action is Move2DAction moveAction)
+		{
+			GD.Print("removed action with name: ", action.GetType().Name, " and final value ", finalVal);
+		}
 	}
 }

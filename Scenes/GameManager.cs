@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Numerics;
 
 public partial class GameManager : Node2D
 {
@@ -24,6 +25,10 @@ public partial class GameManager : Node2D
 			_rand = 0,
 			_easing =
 		}); */
+
+		Godot.Vector2 testVec = new Godot.Vector2(0f, 100f);
+
+		GD.Print(Variant.From(testVec));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

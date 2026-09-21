@@ -4,9 +4,11 @@ using System;
 [GlobalClass]
 public partial class Move2DAction : Action
 {
+    public const string ACTION_NAME = "Move2DAction";
     [Export] public Vector2 _startPos;
     [Export] public Vector2 _endPos;
 
+    //TODO: get this ref & use it instead of  node2d.GlobalPosition
     private Node2D transform;
 
     public override bool Ready()
@@ -30,7 +32,7 @@ public partial class Move2DAction : Action
         _active = true;
 
         //TODO: maybe the actionlist should have control over these signals, instead of the action itself? 
-        EmitSignal(SignalName.ActionReadied, "Move2DAction", node2D, _duration);
+        EmitSignal(SignalName.ActionReadied, ACTION_NAME, this);
 
         return true;
     } 
@@ -45,7 +47,7 @@ public partial class Move2DAction : Action
         
         node2D.GlobalPosition = _startPos + (_endPos - _startPos) * _percent;
 
-        EmitSignal(SignalName.ActionUpdate, node2D, Variant.From(node2D.GlobalPosition), _timeElapsed, _percent);
+        EmitSignal(SignalName.ActionUpdate, ACTION_NAME, this, Variant.From(node2D.GlobalPosition));
 
         //if the action is done
         if (_timeElapsed >= _duration)
@@ -54,4 +56,17 @@ public partial class Move2DAction : Action
         return true;
         
     }
+
+    public override bool Remove()
+    {
+         //if the node has no 2d  transformation
+        if (_ActionObj is Node2D node2D) 
+        {EmitSignal(SignalName.ActionRemoved, ACTION_NAME, this, node2D.GlobalPosition);}
+        
+        //since this action is going to be removed from the list, dispose of its resource
+        Dispose();
+
+        return true;
+    }
+
 }
