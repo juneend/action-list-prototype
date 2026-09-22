@@ -6,10 +6,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-folded = true
 
 [node name="VBox" type="VBoxContainer" parent="." unique_id=1083902809]
-visible = false
 layout_mode = 2
 
 [node name="ActionObj" type="Label" parent="VBox" unique_id=89548181]

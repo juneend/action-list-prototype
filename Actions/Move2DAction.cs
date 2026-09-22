@@ -4,12 +4,21 @@ using System;
 [GlobalClass]
 public partial class Move2DAction : Action
 {
+    public enum movement_type
+    {
+        Global,
+        Local
+    }
+    
     public const string ACTION_NAME = "Move2DAction";
     [Export] public Vector2 _startPos;
     [Export] public Vector2 _endPos;
 
-    //TODO: get this ref & use it instead of  node2d.GlobalPosition
-    private Node2D transform;
+    //FEAT: implement global vs local movement
+    //[Export] public movement_type _type = movement_type.Global;
+
+    //RFTR: get this ref & use it instead of  node2d.GlobalPosition
+    //private Node2D transform;
 
     public override bool Ready()
     {
@@ -31,7 +40,7 @@ public partial class Move2DAction : Action
 
         _active = true;
 
-        //TODO: maybe the actionlist should have control over these signals, instead of the action itself? 
+        //RFTR: maybe the actionlist should have control over these signals, instead of the action itself? 
         EmitSignal(SignalName.ActionReadied, ACTION_NAME, this);
 
         return true;

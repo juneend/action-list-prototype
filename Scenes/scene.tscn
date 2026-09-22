@@ -2,16 +2,9 @@
 
 [ext_resource type="Script" uid="uid://c5jg8sun6djgc" path="res://Scenes/GameManager.cs" id="1_p6gg1"]
 [ext_resource type="Texture2D" uid="uid://brn0s4nr1rq1b" path="res://icon.svg" id="2_lrus4"]
-[ext_resource type="Script" uid="uid://bx21ot2cwt2hj" path="res://Actions/Action.cs" id="3_6yy46"]
-[ext_resource type="PackedScene" uid="uid://bp2qp28bf84l" path="res://Scenes/action_list.tscn" id="3_lrus4"]
-[ext_resource type="Resource" uid="uid://dn6bwi6s54yni" path="res://Objects/move right.tres" id="5_f6sb3"]
 
 [node name="Scene" type="Node2D" unique_id=1461892055]
 script = ExtResource("1_p6gg1")
-
-[node name="ActionList" parent="." unique_id=80442144 node_paths=PackedStringArray("ActionObject") instance=ExtResource("3_lrus4")]
-actionList = Array[ExtResource("3_6yy46")]([ExtResource("5_f6sb3")])
-ActionObject = NodePath("../Icon")
 
 [node name="Icon" type="Sprite2D" parent="." unique_id=1815778976]
 texture = ExtResource("2_lrus4")

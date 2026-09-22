@@ -1,4 +1,81 @@
 {
     "godotTools.editorPath.godot4": "c:\\Users\\thebr\\Downloads\\Godot_v4.7.1\\Godot.exe",
-    "todo-tree.ripgrep.ripgrep": "C:\\Users\\thebr\\scoop\\apps\\ripgrep\\current\\rg.exe"
+    "todo-tree.ripgrep.ripgrep": "C:\\Users\\thebr\\scoop\\apps\\ripgrep\\current\\rg.exe",
+    "todo-tree.general.showActivityBarBadge": true,
+    "todo-tree.general.showIconsInsteadOfTagsInStatusBar": false,
+    "todo-tree.general.tags": [
+        "BUG",
+        "HACK",
+        "TODONE",
+        "TODO",
+        "XXX",
+        "[ ]",
+        "[x]",
+        "FEAT",
+        "OPTM",
+        "RFTR",
+        "FIXME",
+        "SQRL"
+    ],
+    "todo-tree.general.tagGroups": {
+        
+    },
+    "todo-tree.highlights.backgroundColourScheme": [
+        "red",
+        "orange",
+        "#00002a",
+        "green",
+        "blue",
+        "indigo",
+        "violet",
+        "green",
+        "orange",
+        "orange"
+    ],
+    "todo-tree.highlights.foregroundColourScheme": [
+        "white",
+        "black",
+        "white",
+        "white",
+        "white",
+        "white",
+        "black"
+    ],
+    "todo-tree.tree.buttons.scanMode": true,
+    "todo-tree.tree.showCountsInTree": true,
+    "todo-tree.tree.showBadges": true,
+    "todo-tree.tree.hideIconsWhenGroupedByTag": false,
+    "todo-tree.highlights.customHighlight": {
+
+        "BUG": {
+            "icon": "bug"
+        },
+        "HACK": {
+            "icon": "thumbsdown"
+        },
+        "FIXME": {
+            "icon": "flame"
+        },
+        "XXX": {
+            "icon": "x"
+        },
+        "[ ]": {
+            "icon": "issue-draft"
+        },
+        "[x]": {
+            "icon": "issue-closed"
+        },
+        "RFTR":{
+            "icon": "tools"
+        },
+        "OPTM":{
+            "icon": "pulse"
+        },
+
+        "SQRL":{
+            "icon": "squirrel",
+            "iconColour": "forestgreen",
+            "_comment": "todo tree uses octicons for this and i was quite amused that there's a squirrel icon lol"
+        }
+    }
 }

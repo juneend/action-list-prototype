@@ -10,7 +10,8 @@ public abstract partial class Action : Resource
     //once the action is added to a list, if this param is null
     //than the action will effect the parent of the actionlist node
     public Node _ActionObj = null;
-    //TODO: actions should also export a "NodePath" to the actionobj, so it can be set in inspector
+    //FEAT: actions should also export a "NodePath" to the actionobj, so it can be set in inspector
+    [Export] public NodePath _ObjPath = null;
 
     //how long this action should last
     [Export] public float _duration = 0;
@@ -18,7 +19,7 @@ public abstract partial class Action : Resource
     //how much time should pass before the action starts
     [Export] public float _delay = 0;
 
-    //TODO: integrate blocking groups with bitmaps
+    //FEAT: integrate blocking groups with bitmaps
     //does this action stop all other actions in the list?
     [Export] public bool _blocking = false;
 
